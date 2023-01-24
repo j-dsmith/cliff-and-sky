@@ -1,3 +1,5 @@
+import HamburgerButton from "./hamburger-button";
+import MobileNav from "./mobile-nav";
 import NavLinks from "./nav-links";
 
 const Header = () => {
@@ -6,6 +8,7 @@ const Header = () => {
       {/* Todo: add logo */}
       <div className=""></div>
       <NavLinks />
+      <MobileNav />
     </header>
   );
 };

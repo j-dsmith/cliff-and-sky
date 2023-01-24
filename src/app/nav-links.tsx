@@ -17,8 +17,9 @@ const NavLinks = () => {
     { name: "Store", url: "/about" },
     { name: "About", url: "/store" },
   ];
+
   return (
-    <ul className="flex gap-10 text-xl">
+    <ul className="hidden gap-10 text-xl md:flex">
       {navLinks.map(({ name, url }) => (
         <li
           key={name}
