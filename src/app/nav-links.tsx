@@ -1,22 +1,12 @@
 "use client";
 
+import { navLinks } from "@/data/nav-links";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type NavLink = {
-  name: "Projects" | "Store" | "About";
-  url: "/" | "/about" | "/store";
-};
-
 const NavLinks = () => {
   const pathname = usePathname();
-
-  const navLinks: NavLink[] = [
-    { name: "Projects", url: "/" },
-    { name: "Store", url: "/about" },
-    { name: "About", url: "/store" },
-  ];
 
   return (
     <ul className="hidden gap-10 text-xl md:flex">

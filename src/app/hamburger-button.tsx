@@ -3,35 +3,24 @@
 import { FC, SetStateAction, useState } from "react";
 
 import clsx from "clsx";
-import { motion, useAnimationControls } from "framer-motion";
+import { AnimationControls, motion, useAnimationControls } from "framer-motion";
 import { COLORS } from "@/constants/colors";
 
 interface Props {
   isOpen: boolean;
-  setIsOpen: (value: SetStateAction<boolean>) => void;
+  handleClick: () => void;
+  controls: AnimationControls;
 }
 
-const HamburgerButton: FC<Props> = ({ isOpen, setIsOpen }) => {
-  const btnControls = useAnimationControls();
-
-  const handleClick = () => {
-    if (isOpen) {
-      btnControls.start("closed");
-    } else {
-      btnControls.start("open");
-    }
-
-    setIsOpen((prev) => !prev);
-  };
-
+const HamburgerButton: FC<Props> = ({ isOpen, handleClick, controls }) => {
   return (
     <motion.button
       className={clsx(
-        "relative z-10 flex h-9 w-20 flex-col items-center justify-center gap-2 rounded-full md:hidden"
+        "relative z-50 flex h-9 w-20 flex-col items-center justify-center gap-2 rounded-full md:hidden"
       )}
-      variants={btnVariant}
       initial="initial"
-      animate={btnControls}
+      animate={controls}
+      variants={btnVariant}
       onClick={handleClick}
     >
       <motion.div
