@@ -19,6 +19,7 @@ module.exports = {
           "100%": { transform: "rotate(-25deg) translateY(2px)" },
         },
       },
+      fontFamily: { walsheim: ['"GTWalsheim"', "sans-serif"] },
     },
     plugins: [],
   },
