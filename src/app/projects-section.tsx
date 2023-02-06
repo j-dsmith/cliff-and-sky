@@ -1,10 +1,15 @@
+"use client";
+import { ProjectsType } from "@/types/sanity/projects";
+import { FC } from "react";
 import FeaturedProjectCard from "./components/featured-project-card";
-import src1 from "@/assets/one.jpg";
-import src2 from "@/assets/two.jpg";
-import src3 from "@/assets/three.jpg";
 
-const ProjectsSection = () => {
-  const projects = [src1, src2, src3];
+interface Props {
+  projects: ProjectsType;
+}
+
+const ProjectsSection: FC<Props> = ({ projects }) => {
+  console.log(projects);
+
   return (
     <section className="mt-20 px-8  md:px-16">
       <article className="flex flex-col gap-8 pb-8">
@@ -18,15 +23,11 @@ const ProjectsSection = () => {
         </p>
       </article>
       <ul className="flex flex-col gap-8">
-        <li key="src-1">
-          <FeaturedProjectCard project={src1} />
-        </li>
-        <li key="src-2">
-          <FeaturedProjectCard project={src2} />
-        </li>
-        <li key="src-3">
-          <FeaturedProjectCard project={src3} />
-        </li>
+        {projects.map((project: any) => (
+          <li key={project._id}>
+            <FeaturedProjectCard project={project} />
+          </li>
+        ))}
       </ul>
     </section>
   );

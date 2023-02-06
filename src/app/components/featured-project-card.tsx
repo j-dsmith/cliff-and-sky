@@ -1,17 +1,18 @@
 import { FC } from "react";
 import Image, { StaticImageData } from "next/image";
+import { ProjectType } from "@/types/sanity/projects";
 
 interface Props {
-  project: StaticImageData;
+  project: ProjectType;
 }
 
 const FeaturedProjectCard: FC<Props> = ({ project }) => {
   return (
     <article>
       <div className="w-full">
-        <Image src={project} alt="1" className="h-80 w-full object-cover" />
-        <h3 className="mt-4 font-semibold">Project Title</h3>
-        <p className="text-gray-600">Project description</p>
+        {/* <Image src={project.image.url()} alt="test" width={project.image.width()} /> */}
+        <h3 className="mt-4 font-semibold">{project.title}</h3>
+        <p className="text-gray-600">{project.description}</p>
       </div>
     </article>
   );

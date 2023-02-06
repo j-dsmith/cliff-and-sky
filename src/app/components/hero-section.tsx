@@ -17,7 +17,7 @@ const HeroSection = () => {
           height={3456}
           className="h-[500px] object-cover"
         />
-        <div className="absolute top-0 left-8 h-full w-[calc(100%-64px)] bg-teal-600 mix-blend-screen"></div>
+        <div className="absolute top-0 left-8 h-full w-[calc(100%-64px)]"></div>
       </div>
     </section>
   );
