@@ -6,20 +6,23 @@ export const projectsValidator = z.array(
     _id: z.string(),
     title: z.string(),
     description: z.string(),
-    image: z.object({
-      asset: z.object({
-        _ref: z.string(),
-
+    image: z
+      .object({
         asset: z.object({
-          dimensions: z.object({
-            aspectRatio: z.number(),
-            height: z.number(),
-            width: z.number(),
+          url: z.string(),
+          metadata: z.object({
+            dimensions: z.object({
+              aspectRatio: z.number(),
+              height: z.number(),
+              width: z.number(),
+            }),
           }),
         }),
-      }),
-      // .transform((image) => {createImageSrc(image) })),
-    }),
+      })
+      .transform((image) => ({
+        url: createImageSrc(image).url(),
+        dimensions: image.asset.metadata.dimensions,
+      })),
   })
 );
 

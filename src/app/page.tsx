@@ -18,12 +18,11 @@ const HomePage = async () => {
 };
 
 async function getProjects(client: SanityClient) {
-  const res = await client.fetch(`*[_type == "project"]{title, description,  image{..., asset->}}`);
-  console.log(res);
+  const res = await client.fetch(`*[_type == "project"]{_id ,title, description,  image{asset->}}`);
 
   const parsedRes = projectsValidator.parse(res);
 
-  return res;
+  return parsedRes;
 }
 
 export default HomePage;

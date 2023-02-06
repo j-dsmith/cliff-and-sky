@@ -10,7 +10,16 @@ const FeaturedProjectCard: FC<Props> = ({ project }) => {
   return (
     <article>
       <div className="w-full">
-        {/* <Image src={project.image.url()} alt="test" width={project.image.width()} /> */}
+        <div className="h-80">
+          <Image
+            src={project.image.url}
+            alt="test"
+            width={project.image.dimensions.width}
+            height={project.image.dimensions.height}
+            priority={true}
+            className="h-full w-full object-cover"
+          />
+        </div>
         <h3 className="mt-4 font-semibold">{project.title}</h3>
         <p className="text-gray-600">{project.description}</p>
       </div>

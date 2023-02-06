@@ -1,4 +1,3 @@
-"use client";
 import { ProjectsType } from "@/types/sanity/projects";
 import { FC } from "react";
 import FeaturedProjectCard from "./components/featured-project-card";
@@ -8,8 +7,6 @@ interface Props {
 }
 
 const ProjectsSection: FC<Props> = ({ projects }) => {
-  console.log(projects);
-
   return (
     <section className="mt-20 px-8  md:px-16">
       <article className="flex flex-col gap-8 pb-8">
