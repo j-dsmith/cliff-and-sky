@@ -8,45 +8,61 @@ import MobileNavLinks from "./mobile-nav-links";
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const overlayControls = useAnimationControls();
-  const btnControls = useAnimationControls();
-  const linkControls = useAnimationControls();
+  const navControls = useAnimationControls();
 
   const handleMenuButtonClick = () => {
     if (isOpen) {
-      overlayControls.start("closed");
-      btnControls.start("closed");
-      linkControls.start("closed");
+      navControls.start("closed");
     } else {
-      overlayControls.start("open");
-      btnControls.start("open");
-      linkControls.start("open");
+      navControls.start("open");
     }
     setIsOpen((isOpen) => !isOpen);
   };
 
   return (
-    <article className="isolate">
-      <nav className="fixed top-0 left-0 right-0">
+    <article className="relative isolate z-50">
+      <motion.nav
+        initial="initial"
+        animate={navControls}
+        variants={navVariants}
+        className="fixed top-0 left-0 right-0 bottom-0"
+      >
         <motion.div
           initial="initial"
           variants={overlayVariants}
-          animate={overlayControls}
+          animate={navControls}
           className="absolute z-0 h-full w-full origin-top bg-black"
         />
-        <MobileNavLinks controls={linkControls} />
-      </nav>
-      <HamburgerButton isOpen={isOpen} handleClick={handleMenuButtonClick} controls={btnControls} />
+        <MobileNavLinks controls={navControls} />
+      </motion.nav>
+      <HamburgerButton isOpen={isOpen} handleClick={handleMenuButtonClick} controls={navControls} />
     </article>
   );
+};
+
+const navVariants: Variants = {
+  initial: {
+    visibility: "hidden",
+  },
+  open: {
+    visibility: "visible",
+  },
+  closed: {
+    visibility: "hidden",
+    transition: {
+      visibility: { delay: 0.6 },
+    },
+  },
 };
 
 const overlayVariants: Variants = {
   initial: {
     scaleY: 0,
+    visibility: "hidden",
   },
   open: {
     scaleY: 1,
+    visibility: "visible",
     transition: {
       duration: 0.6,
       ease: EASING.easeInOutCubic,
@@ -54,7 +70,9 @@ const overlayVariants: Variants = {
   },
   closed: {
     scaleY: 0,
+    visibility: "hidden",
     transition: {
+      visibility: { delay: 0.6 },
       duration: 0.6,
       ease: EASING.easeInOutCubic,
     },

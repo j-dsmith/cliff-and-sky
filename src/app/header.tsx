@@ -1,5 +1,5 @@
-import MobileNav from "@/components/mobile-nav";
-import NavLinks from "@/components/nav-links";
+import MobileNav from "@/app/components/mobile-nav";
+import NavLinks from "@/app/components/nav-links";
 
 const Header = () => {
   return (
