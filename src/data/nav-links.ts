@@ -1,10 +1,7 @@
-type NavLink = {
-  name: "Projects" | "Store" | "About";
-  url: "/" | "/about" | "/store";
-};
-
-export const navLinks: NavLink[] = [
-  { name: "Projects", url: "/" },
-  { name: "Store", url: "/about" },
-  { name: "About", url: "/store" },
+export const navLinks = [
+  { name: "Home", url: "/" },
+  { name: "About", url: "/about" },
+  { name: "Portfolio", url: "/portfolio" },
+  { name: "Paintings", url: "paintings" },
+  { name: "Shop", url: "/shop" },
 ];

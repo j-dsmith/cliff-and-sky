@@ -12,15 +12,17 @@ const MobileNav = () => {
 
   const handleMenuButtonClick = () => {
     if (isOpen) {
+      document.body.classList.remove("fixed");
       navControls.start("closed");
     } else {
+      document.body.classList.add("fixed");
       navControls.start("open");
     }
     setIsOpen((isOpen) => !isOpen);
   };
 
   return (
-    <article className="relative isolate z-50">
+    <article className="isolate z-50">
       <motion.nav
         initial="initial"
         animate={navControls}

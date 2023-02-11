@@ -18,7 +18,7 @@ const MobileNavLinks: FC<Props> = ({ controls }) => {
   return (
     <motion.ul
       variants={listVariant}
-      className="relative z-10 mt-36 mb-32 flex flex-col items-center justify-center gap-6 text-xl text-white"
+      className="relative z-10 mt-36 mb-32 flex flex-col justify-center gap-6 px-16 text-xl text-white"
     >
       {navLinks.map(({ name, url }, i) => (
         <li key={name} className="">
@@ -29,10 +29,7 @@ const MobileNavLinks: FC<Props> = ({ controls }) => {
             custom={i}
             className=""
           >
-            <Link
-              className="rounded-full border-2 border-white py-0.5 px-3 text-3xl font-light uppercase"
-              href={url}
-            >
+            <Link className="text-5xl font-light uppercase" href={url}>
               {name}
             </Link>
           </motion.div>
