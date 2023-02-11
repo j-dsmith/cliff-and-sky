@@ -9,8 +9,6 @@ export const myClient = createClient({
 });
 
 export const createImageSrc = (image: SanityImageSource) => {
-  console.log(image);
-
   const builder = imageUrlBuilder(myClient);
   // console.log(builder.image(image));
 

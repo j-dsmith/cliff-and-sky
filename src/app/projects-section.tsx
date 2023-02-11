@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { ProjectsType } from "@/types/sanity/projects";
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 import FeaturedProjectCard from "./components/featured-project-card";
 import { EASING } from "@/constants/animations";
 
@@ -13,6 +13,7 @@ interface Props {
 const ProjectsSection: FC<Props> = ({ projects }) => {
   const ref = useRef(null);
   const isInView = useInView(ref);
+  const [doneAnimating, setdoneAnimating] = useState(false);
 
   return (
     <section className="mt-20 px-8  md:px-16">
@@ -25,7 +26,8 @@ const ProjectsSection: FC<Props> = ({ projects }) => {
             className="absolute inline-block h-full w-full origin-left translate-y-full"
             variants={sectionHeaderVariants}
             initial="initial"
-            animate={isInView ? "animate" : ""}
+            animate={isInView && !doneAnimating ? "animate" : doneAnimating ? "final" : ""}
+            onAnimationComplete={() => setdoneAnimating(true)}
           >
             Work
           </motion.span>
@@ -61,6 +63,11 @@ const sectionHeaderVariants = {
       duration: 0.9,
       ease: EASING.easeOutCubic,
     },
+  },
+  final: {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
   },
 };
 

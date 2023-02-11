@@ -35,7 +35,7 @@ const MobileNav = () => {
           animate={navControls}
           className="absolute z-0 h-full w-full origin-top bg-black"
         />
-        <MobileNavLinks controls={navControls} />
+        <MobileNavLinks controls={navControls} isOpen={isOpen} />
       </motion.nav>
       <HamburgerButton isOpen={isOpen} handleClick={handleMenuButtonClick} controls={navControls} />
     </article>
