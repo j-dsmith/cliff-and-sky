@@ -3,7 +3,7 @@ import NavLinks from "@/app/components/nav-links";
 
 const Header = () => {
   return (
-    <header className="flex h-20 items-center justify-between px-8 md:px-16">
+    <header className="flex h-20 items-center justify-between px-4 md:px-16">
       {/* Todo: add logo */}
       <div className=""></div>
       <NavLinks />
