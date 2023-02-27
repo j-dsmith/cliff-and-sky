@@ -5,6 +5,8 @@ import Input from "./input";
 import InputErrorMessage from "./InputErrorMessage";
 
 const ContactForm = () => {
+  // TODO: Add a "thank you" message after form submission
+  // TODO: Add API endpoint to send email using nodemailer
   const {
     register,
     handleSubmit,
@@ -29,7 +31,6 @@ const ContactForm = () => {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    window.location.href = `mailto:${data.email}`;
   };
 
   return (
