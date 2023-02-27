@@ -1,16 +1,15 @@
 import { myClient } from "@/lib/sanity";
 import { projectsValidator } from "@/types/sanity/projects";
 import { SanityClient } from "next-sanity";
-import { z, ZodError } from "zod";
 
-import HeroSection from "./components/hero-section";
-import ProjectsSection from "./projects-section";
+import HeroSection from "@/components/hero-section";
+import ProjectsSection from "@/components/projects-section";
 
 const HomePage = async () => {
   const projects = await getProjects(myClient);
 
   return (
-    <div className="min-h-[calc(100vh-80px)]">
+    <div>
       <HeroSection />
       <ProjectsSection projects={projects} />
     </div>

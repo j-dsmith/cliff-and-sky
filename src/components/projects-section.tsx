@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { ProjectsType } from "@/types/sanity/projects";
 import { FC, useRef, useState } from "react";
-import FeaturedProjectCard from "./components/featured-project-card";
+import FeaturedProjectCard from "@/components/featured-project-card";
 import { EASING } from "@/constants/animations";
 
 interface Props {

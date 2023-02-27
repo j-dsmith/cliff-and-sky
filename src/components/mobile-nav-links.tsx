@@ -1,5 +1,3 @@
-"use client";
-
 import { usePathname } from "next/navigation";
 import { AnimationControls, motion, Variants } from "framer-motion";
 
@@ -7,17 +5,41 @@ import { navLinks } from "@/data/nav-links";
 import { EASING } from "@/constants/animations";
 import Link from "next/link";
 import { FC } from "react";
+import { cva, VariantProps } from "class-variance-authority";
 
-interface Props {
+interface Props extends Required<Pick<NavVariantProps, "theme">> {
   controls: AnimationControls;
-  isOpen: boolean;
+  theme: "dark" | "light" | null;
 }
 
-const MobileNavLinks: FC<Props> = ({ controls, isOpen }) => {
-  const pathname = usePathname();
+type NavVariantProps = VariantProps<typeof navClasses>;
 
+const navClasses = cva(
+  [
+    "relative",
+    "z-10",
+    "mt-36",
+    "mb-32",
+    "flex",
+    "flex-col",
+    "justify-center",
+    "gap-6",
+    "px-16",
+    "text-xl",
+  ],
+  {
+    variants: {
+      theme: {
+        dark: ["text-black"],
+        light: ["text-white"],
+      },
+    },
+  }
+);
+
+const MobileNavLinks: FC<Props> = ({ controls, theme }) => {
   return (
-    <motion.ul className="relative z-10 mt-36 mb-32 flex flex-col justify-center gap-6 px-16 text-xl text-white">
+    <motion.ul className={navClasses({ theme })}>
       {navLinks.map(({ name, url }, i) => (
         <li key={name} className="relative h-16 overflow-hidden">
           <motion.div
@@ -38,10 +60,6 @@ const MobileNavLinks: FC<Props> = ({ controls, isOpen }) => {
 };
 
 // Animations
-
-// const getDelay = (i: number) => {
-//   return i === 0 ? 0.3 : i === 1 ? 0.6 : 0.9;
-// };
 
 const linkVariant: Variants = {
   initial: { y: 125, opacity: 0, rotate: 6 },

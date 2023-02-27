@@ -1,14 +1,23 @@
+import { FC } from "react";
 import { navLinks } from "@/data/nav-links";
 import { socialLinks } from "@/data/social-links";
 import Link from "next/link";
-
-import { FaFacebookMessenger, FaInstagram, FaLinkedin } from "react-icons/fa";
 import ArrowLink from "./arrow-link";
 import SocialLink from "./social-link";
+import clsx from "clsx";
 
-const Footer = () => {
+const Footer: FC<{ theme: "black" | "white" }> = ({ theme }) => {
+  const themeClasses = {
+    black: "text-white bg-black",
+    white: "text-black bg-white",
+  };
   return (
-    <section className="flex flex-col justify-center gap-1 bg-black px-8 py-32 text-white">
+    <section
+      className={clsx(
+        "flex flex-col justify-center gap-1 bg-black px-8 py-32 text-white",
+        themeClasses[theme]
+      )}
+    >
       <p className="font-walsheim text-4xl font-bold uppercase">Have An Idea?</p>
 
       <div className="flex items-center justify-between">

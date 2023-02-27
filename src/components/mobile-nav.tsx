@@ -1,12 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 import { motion, useAnimationControls, Variants } from "framer-motion";
 import { EASING } from "@/constants/animations";
 import HamburgerButton from "./hamburger-button";
 import MobileNavLinks from "./mobile-nav-links";
+import { cva, VariantProps } from "class-variance-authority";
 
-const MobileNav = () => {
+type NavVariantProps = VariantProps<typeof overlayClasses>;
+
+interface Props extends Required<Pick<NavVariantProps, "theme">> {
+  theme: "dark" | "light" | null;
+}
+
+const overlayClasses = cva(["absolute", "z-0", "h-full", "w-full", "origin-top", "bg-black"], {
+  variants: {
+    theme: {
+      dark: ["bg-white"],
+      light: ["bg-black"],
+    },
+  },
+});
+
+const MobileNav: FC<Props> = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navControls = useAnimationControls();
 
@@ -33,11 +49,16 @@ const MobileNav = () => {
           initial="initial"
           variants={overlayVariants}
           animate={navControls}
-          className="absolute z-0 h-full w-full origin-top bg-black"
+          className={overlayClasses({ theme })}
         />
-        <MobileNavLinks controls={navControls} isOpen={isOpen} />
+        <MobileNavLinks theme={theme} controls={navControls} />
       </motion.nav>
-      <HamburgerButton isOpen={isOpen} handleClick={handleMenuButtonClick} controls={navControls} />
+      <HamburgerButton
+        theme={theme}
+        isOpen={isOpen}
+        handleClick={handleMenuButtonClick}
+        controls={navControls}
+      />
     </article>
   );
 };
