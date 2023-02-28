@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="fixed">
         <Header theme="light" />
         {children}
-        <Footer theme="black" />
+        <Footer theme="dark" />
       </body>
     </html>
   );

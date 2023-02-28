@@ -8,3 +8,31 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "PPNeueMonreal-Thin";
+  src: url("/fonts/PPNeueMonreal-Thin.otf") format("otf");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PPNeueMonreal";
+  src: url("/fonts/PPNeueMonreal-Book.otf") format("otf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PPNeueMonreal-Medium";
+  src: url("/fonts/PPNeueMonreal-Medium.otf") format("otf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PPNeueMonreal-Bold";
+  src: url("/fonts/PPNeueMonreal-Bold.otf") format("otf");
+  font-weight: 700;
+  font-style: normal;
+}

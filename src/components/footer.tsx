@@ -5,19 +5,23 @@ import Link from "next/link";
 import ArrowLink from "./arrow-link";
 import SocialLink from "./social-link";
 import clsx from "clsx";
+import { cva } from "class-variance-authority";
 
-const Footer: FC<{ theme: "black" | "white" }> = ({ theme }) => {
-  const themeClasses = {
-    black: "text-white bg-black",
-    white: "text-black bg-white",
-  };
+const footerClasses = cva(["flex", "flex-col", "justify-center", "gap-1", "px-8", "py-32"], {
+  variants: {
+    theme: {
+      dark: ["text-white", "bg-black"],
+      light: ["text-black", "bg-white"],
+    },
+  },
+  defaultVariants: {
+    theme: "dark",
+  },
+});
+
+const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
   return (
-    <section
-      className={clsx(
-        "flex flex-col justify-center gap-1 bg-black px-8 py-32 text-white",
-        themeClasses[theme]
-      )}
-    >
+    <section className={footerClasses({ theme })}>
       <p className="font-walsheim text-4xl font-bold uppercase">Have An Idea?</p>
 
       <div className="flex items-center justify-between">

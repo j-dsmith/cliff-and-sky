@@ -3,7 +3,7 @@ import { projectsValidator } from "@/types/sanity/projects";
 import { SanityClient } from "next-sanity";
 
 import HeroSection from "@/components/hero-section";
-import ProjectsSection from "@/components/projects-section";
+import ProjectsSection from "@/components/projects-section/projects-section";
 
 const HomePage = async () => {
   const projects = await getProjects(myClient);

@@ -19,7 +19,12 @@ module.exports = {
           "100%": { transform: "rotate(-25deg) translateY(2px)" },
         },
       },
-      fontFamily: { walsheim: ['"GTWalsheim"', "sans-serif"] },
+      fontFamily: {
+        walsheim: ['"GTWalsheim"', "sans-serif"],
+        neue: ["PPNeueMonreal", "sans-serif"],
+        ["neue-medium"]: ["PPNeueMonreal-Medium", "sans-serif"],
+        ["neue-thin"]: ["PPNeueMonreal-Thin", "sans-serif"],
+      },
     },
     plugins: [],
   },
