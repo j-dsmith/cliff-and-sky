@@ -9,7 +9,7 @@ interface HeaderProps
   extends HTMLAttributes<HTMLDivElement>,
     Required<Pick<HeaderVariantProps, "theme">> {}
 
-const headerClasses = cva(["flex", "h-20", "items-center", "justify-between", "px-4", "md:px-16"], {
+const headerClasses = cva(["flex", "h-20", "items-center", "justify-between", "px-6", "md:px-16"], {
   variants: {
     theme: {
       dark: ["bg-black"],

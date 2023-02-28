@@ -4,6 +4,7 @@ import { SanityClient } from "next-sanity";
 
 import HeroSection from "@/components/hero-section";
 import ProjectsSection from "@/components/projects-section/projects-section";
+import Spacer from "@/components/spacer";
 
 const HomePage = async () => {
   const projects = await getProjects(myClient);
@@ -11,13 +12,17 @@ const HomePage = async () => {
   return (
     <div>
       <HeroSection />
+      <Spacer className="h-20" />
       <ProjectsSection projects={projects} />
+      <Spacer className="h-20" />
     </div>
   );
 };
 
 async function getProjects(client: SanityClient) {
-  const res = await client.fetch(`*[_type == "project"]{_id ,title, description,  image{asset->}}`);
+  const res = await client.fetch(
+    `*[_type == "project"]{_id ,title, category, description,  image{asset->}}`
+  );
 
   const parsedRes = projectsValidator.parse(res);
 

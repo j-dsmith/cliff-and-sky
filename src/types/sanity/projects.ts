@@ -5,6 +5,7 @@ export const projectsValidator = z.array(
   z.object({
     _id: z.string(),
     title: z.string(),
+    category: z.string(),
     description: z.string(),
     image: z
       .object({

@@ -1,15 +1,14 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { ProjectsType } from "@/types/sanity/projects";
-import { FC, useEffect, useRef, useState } from "react";
-import FeaturedProjectCard from "@/components/featured-project-card";
+import { FC, useRef, useState } from "react";
 import { EASING } from "@/constants/animations";
 import ProjectsSectionHeader from "./projects-section-header";
-import ArrowLink from "@/components/arrow-link";
 import ProjectsSectionSubheader from "./projects-section-subheader";
 import Spacer from "../spacer";
 import ViewAllLink from "./view-all-projects-link";
+import ProjectsList from "./projects-list";
 
 interface Props {
   projects: ProjectsType;
@@ -21,7 +20,7 @@ const ProjectsSection: FC<Props> = ({ projects }) => {
   const [doneAnimating, setDoneAnimating] = useState(false);
 
   return (
-    <section className="mt-20 px-8  font-neue md:px-16">
+    <section className="px-6 font-neue md:px-16">
       <article className="flex flex-col gap-2 pb-8">
         <div ref={ref}>
           <ProjectsSectionHeader
@@ -44,13 +43,7 @@ const ProjectsSection: FC<Props> = ({ projects }) => {
       </article>
       <Spacer className="h-16" />
 
-      <ul className="flex flex-col gap-8">
-        {projects.map((project: any) => (
-          <li key={project._id}>
-            <FeaturedProjectCard project={project} />
-          </li>
-        ))}
-      </ul>
+      <ProjectsList projects={projects} />
     </section>
   );
 };

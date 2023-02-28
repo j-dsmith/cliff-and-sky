@@ -18,7 +18,7 @@ const ViewAllLink: FC<Props> = ({ isInView, doneAnimating, setDoneAnimating }) =
       onAnimationComplete={() => setDoneAnimating(true)}
       className="flex items-center gap-4 will-change-transform"
     >
-      <p className="font-neue-thin text-2xl uppercase">See All</p>
+      <p className="font-neue-thin text-xl uppercase">See All</p>
       <ArrowLink url="/design" theme="light" />
     </motion.div>
   );

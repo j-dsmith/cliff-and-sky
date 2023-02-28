@@ -39,7 +39,7 @@ const navClasses = cva(
 
 const MobileNavLinks: FC<Props> = ({ controls, theme }) => {
   return (
-    <motion.ul className={navClasses({ theme })}>
+    <ul className={navClasses({ theme })}>
       {navLinks.map(({ name, url }, i) => (
         <li key={name} className="relative h-16 overflow-hidden">
           <motion.div
@@ -47,7 +47,7 @@ const MobileNavLinks: FC<Props> = ({ controls, theme }) => {
             variants={linkVariant}
             animate={controls}
             custom={i}
-            className=""
+            className="will-change-transform"
           >
             <Link className="text-6xl uppercase" href={url}>
               {name}
@@ -55,7 +55,7 @@ const MobileNavLinks: FC<Props> = ({ controls, theme }) => {
           </motion.div>
         </li>
       ))}
-    </motion.ul>
+    </ul>
   );
 };
 

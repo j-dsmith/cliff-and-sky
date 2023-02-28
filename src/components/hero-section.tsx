@@ -16,7 +16,7 @@ const HeroSection = () => {
     <motion.section
       initial="initial"
       animate="animate"
-      className="isolate flex h-[calc(100vh-80px)] flex-col items-center justify-end"
+      className="isolate flex h-[calc(100vh-80px)] flex-col items-center justify-end px-6"
     >
       <motion.h1
         className="relative z-50 translate-y-8 text-center font-walsheim text-8xl uppercase"
@@ -26,7 +26,7 @@ const HeroSection = () => {
         <br />
         <span className="">& Sky</span>
       </motion.h1>
-      <div className="relative z-10 overflow-y-auto px-8 md:px-16">
+      <div className="relative z-10 overflow-y-auto md:px-16">
         <Image
           src={heroSrc}
           alt="hero image"

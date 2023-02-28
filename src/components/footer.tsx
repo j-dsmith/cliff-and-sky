@@ -7,7 +7,7 @@ import SocialLink from "./social-link";
 import clsx from "clsx";
 import { cva } from "class-variance-authority";
 
-const footerClasses = cva(["flex", "flex-col", "justify-center", "gap-1", "px-8", "py-32"], {
+const footerClasses = cva(["flex", "flex-col", "justify-center", "gap-1", "px-6", "py-32"], {
   variants: {
     theme: {
       dark: ["text-white", "bg-black"],

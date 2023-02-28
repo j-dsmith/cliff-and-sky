@@ -13,14 +13,17 @@ interface Props extends Required<Pick<NavVariantProps, "theme">> {
   theme: "dark" | "light" | null;
 }
 
-const overlayClasses = cva(["absolute", "z-0", "h-full", "w-full", "origin-top", "bg-black"], {
-  variants: {
-    theme: {
-      dark: ["bg-white"],
-      light: ["bg-black"],
+const overlayClasses = cva(
+  ["absolute", "z-0", "h-full", "w-full", "origin-top", "bg-black", "will-change-transform"],
+  {
+    variants: {
+      theme: {
+        dark: ["bg-white"],
+        light: ["bg-black"],
+      },
     },
-  },
-});
+  }
+);
 
 const MobileNav: FC<Props> = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
