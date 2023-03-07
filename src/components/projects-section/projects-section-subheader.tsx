@@ -1,20 +1,17 @@
 import { Dispatch, FC } from "react";
 import { EASING } from "@/constants/animations";
-import { motion } from "framer-motion";
+import { AnimationControls, motion } from "framer-motion";
 
 interface Props {
-  isInView: boolean;
-  doneAnimating: boolean;
-  setDoneAnimating: Dispatch<boolean>;
+  controls: AnimationControls;
 }
 
-const ProjectsSectionSubheader: FC<Props> = ({ isInView, doneAnimating, setDoneAnimating }) => {
+const ProjectsSectionSubheader: FC<Props> = ({ controls }) => {
   return (
     <motion.p
       variants={headerVariants}
       initial="initial"
-      animate={isInView && !doneAnimating ? "animate" : doneAnimating ? "final" : ""}
-      onAnimationComplete={() => setDoneAnimating(true)}
+      animate={controls}
       className="w-[25ch] font-light text-slate-700 will-change-transform"
     >
       Freelance and personal graphic design projects I&apos;m proud of!

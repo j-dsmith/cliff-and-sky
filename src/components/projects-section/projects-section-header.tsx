@@ -1,14 +1,12 @@
 import { Dispatch, FC } from "react";
 import { EASING } from "@/constants/animations";
-import { motion } from "framer-motion";
+import { AnimationControls, motion } from "framer-motion";
 
 interface Props {
-  isInView: boolean;
-  doneAnimating: boolean;
-  setDoneAnimating: Dispatch<boolean>;
+  controls: AnimationControls;
 }
 
-const ProjectsSectionHeader: FC<Props> = ({ isInView, doneAnimating, setDoneAnimating }) => {
+const ProjectsSectionHeader: FC<Props> = ({ controls }) => {
   const textClasses =
     "absolute inline-block h-full w-full origin-left py-1 leading-none will-change-transform";
   const textSections = ["Selected", "Projects"];
@@ -19,8 +17,7 @@ const ProjectsSectionHeader: FC<Props> = ({ isInView, doneAnimating, setDoneAnim
           className={textClasses}
           variants={textVariants}
           initial="initial"
-          animate={isInView && !doneAnimating ? "animate" : doneAnimating ? "final" : ""}
-          onAnimationComplete={() => setDoneAnimating(true)}
+          animate={controls}
         >
           {text}
         </motion.span>

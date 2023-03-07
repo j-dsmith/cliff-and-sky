@@ -1,21 +1,18 @@
 import { FC, Dispatch } from "react";
 import { EASING } from "@/constants/animations";
-import { motion } from "framer-motion";
+import { AnimationControls, motion } from "framer-motion";
 import ArrowLink from "../arrow-link";
 
 interface Props {
-  isInView: boolean;
-  doneAnimating: boolean;
-  setDoneAnimating: Dispatch<boolean>;
+  controls: AnimationControls;
 }
 
-const ViewAllLink: FC<Props> = ({ isInView, doneAnimating, setDoneAnimating }) => {
+const ViewAllLink: FC<Props> = ({ controls }) => {
   return (
     <motion.div
       variants={wrapperVariants}
       initial="initial"
-      animate={isInView && !doneAnimating ? "animate" : doneAnimating ? "final" : ""}
-      onAnimationComplete={() => setDoneAnimating(true)}
+      animate={controls}
       className="flex items-center gap-4 will-change-transform"
     >
       <p className="font-neue-thin text-xl uppercase">See All</p>
