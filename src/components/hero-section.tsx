@@ -40,6 +40,7 @@ const HeroSection = () => {
           width={5184}
           height={3456}
           className="h-[500px] object-cover"
+          priority={true}
         />
 
         <div className="absolute top-0 left-8 h-full w-[calc(100%-64px)]"></div>

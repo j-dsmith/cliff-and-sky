@@ -16,16 +16,17 @@ export const useInViewAnimation = <T extends RefObject<Element>>(
 
   // Start animation sequence when element comes in view
   useEffect(() => {
+    const handleInViewAnimation = async (controls: AnimationControls) => {
+      // ? animation variants are defined in the component but must always be named "animate"
+      await controls.start("animate");
+
+      setDoneAnimating(true);
+    };
+
     if (!doneAnimating && isInView) {
       handleInViewAnimation(controls);
     }
   }, [isInView, doneAnimating, controls]);
-
-  const handleInViewAnimation = async (controls: AnimationControls) => {
-    // ? animation variants are defined in the component but must always be named "animate"
-    await controls.start("animate");
-    setDoneAnimating(true);
-  };
 
   return doneAnimating;
 };

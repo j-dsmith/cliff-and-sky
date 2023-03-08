@@ -29,13 +29,12 @@ const footerClasses = cva(["flex", "flex-col", "justify-center", "gap-1", "px-6"
 });
 
 const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
-  const headerRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const controls = useAnimationControls();
-  useInViewAnimation<typeof headerRef>(headerRef, controls);
-  const finished = useInViewAnimation<typeof contentRef>(contentRef, controls);
-
+  const finished = useInViewAnimation<typeof ref>(ref, controls);
+  console.log(finished);
   const fadeTransition = {
     duration: 1.2,
     ease: EASING.easeOutCubic,
@@ -48,7 +47,7 @@ const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
     <section className={footerClasses({ theme })}>
       {/* <p className="text-4xl font-semibold">Design Idea?</p> */}
       <FlyInText
-        ref={headerRef}
+        ref={ref}
         text="Design Idea?"
         controls={controls}
         className="text-4xl font-semibold"
