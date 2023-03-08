@@ -1,57 +1,72 @@
 import { FC } from "react";
 import clsx from "clsx";
-import { AnimationControls, motion, useAnimationControls } from "framer-motion";
+import { AnimationControls, motion } from "framer-motion";
 import { COLORS } from "@/constants/colors";
+import { EASING } from "@/constants/animations";
+import { cva } from "class-variance-authority";
 
 interface Props {
-  isOpen: boolean;
   theme: "dark" | "light" | null;
   handleClick: () => void;
   controls: AnimationControls;
 }
 
-const HamburgerButton: FC<Props> = ({ isOpen, theme, handleClick, controls }) => {
-  const isLineVariant = (
-    variant: typeof btnVariant | typeof topLineVariant
-  ): variant is typeof btnVariant => {
-    return (variant as typeof topLineVariant).initial.y !== undefined;
-  };
-
-  const setVariantColors = (theme: "dark" | "light" | null, variant: typeof btnVariant) => {
-    const dark = {
-      ...variant,
-      initial: { ...variant.initial, backgroundColor: COLORS.white },
-      open: { ...variant.open, backgroundColor: COLORS.black },
-      closed: { ...variant.closed, backgroundColor: COLORS.white },
-    };
-    const light = {
-      ...variant,
-      initial: { ...variant.initial, backgroundColor: COLORS.black },
-      open: { ...variant.open, backgroundColor: COLORS.white },
-      closed: { ...variant.closed, backgroundColor: COLORS.black },
-    };
-    if (isLineVariant(variant)) {
-      return theme === "dark" ? light : dark;
+const HamburgerButton: FC<Props> = ({ theme, handleClick, controls }) => {
+  const buttonClasses = cva(
+    [
+      "relative",
+      "z-50",
+      "flex",
+      "h-9",
+      "w-20",
+      "flex-col",
+      "items-center",
+      "justify-center",
+      "gap-2",
+      "rounded-full",
+      "md:hidden",
+      "will-change-transform",
+    ],
+    {
+      variants: {
+        theme: {
+          dark: ["bg-white"],
+          light: ["bg-black"],
+        },
+      },
     }
-    return theme === "dark" ? dark : light;
-  };
+  );
+
+  const lineClasses = cva(
+    ["flex", "h-0.5", "w-8", "origin-left", "bg-white", "will-change-transform"],
+    {
+      variants: {
+        theme: {
+          dark: ["bg-black"],
+          light: ["bg-white"],
+        },
+      },
+    }
+  );
+
   return (
     <motion.button
-      className={clsx(
-        "relative z-50 flex h-9 w-20 flex-col items-center justify-center gap-2 rounded-full md:hidden"
-      )}
-      initial="initial"
+      className={buttonClasses({ theme })}
+      initial="hidden"
       animate={controls}
-      variants={setVariantColors(theme, btnVariant)}
+      variants={btnVariant}
       onClick={handleClick}
+      custom={theme}
     >
       <motion.div
-        variants={setVariantColors(theme, topLineVariant)}
-        className={clsx("flex h-0.5 w-8 origin-left bg-white")}
+        variants={topLineVariant}
+        custom={theme}
+        className={lineClasses({ theme })}
       ></motion.div>
       <motion.div
-        variants={setVariantColors(theme, bottomLineVariant)}
-        className={clsx("flex h-0.5 w-8 origin-left bg-white")}
+        variants={bottomLineVariant}
+        custom={theme}
+        className={lineClasses({ theme })}
       ></motion.div>
     </motion.button>
   );
@@ -59,54 +74,74 @@ const HamburgerButton: FC<Props> = ({ isOpen, theme, handleClick, controls }) =>
 
 // Variants
 const btnVariant = {
-  initial: {
-    backgroundColor: COLORS.black,
+  hidden: {
+    y: -10,
+    opacity: 0,
   },
-  open: {
-    backgroundColor: COLORS.white,
+  visible: {
+    y: 0,
+    opacity: 1,
     transition: {
-      duration: 0.3,
-      ease: "easeInOut",
+      delay: 1.2,
+      duration: 0.6,
+      ease: EASING.easeInOutCubic,
     },
   },
-  closed: {
-    backgroundColor: COLORS.black,
+  initial: (theme: "dark" | "light" | null) => ({
+    backgroundColor: theme === "light" ? COLORS.black : COLORS.white,
+  }),
+  open: (theme: "dark" | "light" | null) => ({
+    backgroundColor: theme === "light" ? COLORS.white : COLORS.black,
     transition: {
       duration: 0.3,
-      ease: "easeInOut",
+      ease: EASING.easeInOutCubic,
     },
-  },
+  }),
+  closed: (theme: "dark" | "light" | null) => ({
+    backgroundColor: theme === "light" ? COLORS.black : COLORS.white,
+    transition: {
+      duration: 0.3,
+      ease: EASING.easeInOutCubic,
+    },
+  }),
 };
 
 const topLineVariant = {
-  initial: {
-    backgroundColor: COLORS.white,
+  initial: (theme: "dark" | "light" | null) => ({
+    backgroundColor: theme === "light" ? COLORS.white : COLORS.black,
     rotate: 0,
     y: 0,
-  },
-  open: {
-    backgroundColor: COLORS.black,
+  }),
+  open: (theme: "dark" | "light" | null) => ({
+    backgroundColor: theme === "light" ? COLORS.black : COLORS.white,
     rotate: 25,
     y: -2,
     transition: {
       duration: 0.3,
       ease: "easeInOut",
     },
-  },
-  closed: {
-    backgroundColor: COLORS.white,
+  }),
+  closed: (theme: "dark" | "light" | null) => ({
+    backgroundColor: theme === "light" ? COLORS.white : COLORS.black,
     rotate: 0,
     y: 0,
     transition: {
       duration: 0.3,
       ease: "easeInOut",
     },
-  },
+  }),
 };
 
 const bottomLineVariant = {
   ...topLineVariant,
-  open: { ...topLineVariant.open, rotate: -25, y: 2 },
+  open: (theme: "dark" | "light" | null) => ({
+    ...topLineVariant.open,
+    backgroundColor: theme === "light" ? COLORS.black : COLORS.white,
+    rotate: -25,
+    y: 2,
+  }),
 };
+
+const initialButtonVariant = {};
 
 export default HamburgerButton;

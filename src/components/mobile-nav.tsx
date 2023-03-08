@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { motion, useAnimationControls, Variants } from "framer-motion";
 import { EASING } from "@/constants/animations";
 import HamburgerButton from "./hamburger-button";
@@ -40,6 +40,11 @@ const MobileNav: FC<Props> = ({ theme }) => {
     setIsOpen((isOpen) => !isOpen);
   };
 
+  // Start animation to show mobile menu button on mount
+  useEffect(() => {
+    navControls.start("visible");
+  }, [navControls]);
+
   return (
     <article className="isolate z-50">
       <motion.nav
@@ -56,12 +61,7 @@ const MobileNav: FC<Props> = ({ theme }) => {
         />
         <MobileNavLinks theme={theme} controls={navControls} />
       </motion.nav>
-      <HamburgerButton
-        theme={theme}
-        isOpen={isOpen}
-        handleClick={handleMenuButtonClick}
-        controls={navControls}
-      />
+      <HamburgerButton theme={theme} handleClick={handleMenuButtonClick} controls={navControls} />
     </article>
   );
 };

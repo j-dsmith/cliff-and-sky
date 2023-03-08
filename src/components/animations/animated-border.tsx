@@ -1,18 +1,20 @@
 import { EASING } from "@/constants/animations";
 import { FC } from "react";
 import { motion, Variants } from "framer-motion";
+import clsx from "clsx";
 
 interface Props {
-  finished: boolean;
+  trigger: boolean;
+  bgColor: string;
 }
 
-const AnimatedBorder: FC<Props> = ({ finished }) => {
+const AnimatedBorder: FC<Props> = ({ trigger, bgColor }) => {
   return (
     <motion.div
-      className="h-px w-full origin-left bg-black"
+      className={clsx("h-px w-full origin-left", bgColor)}
       variants={borderVariants}
       initial="initial"
-      animate={finished && "animate"}
+      animate={trigger && "animate"}
     />
   );
 };

@@ -1,9 +1,10 @@
 import { FC, useRef } from "react";
 import { ProjectType } from "@/types/sanity/projects";
 import { HiArrowRight } from "react-icons/hi2";
-import { AnimationControls, motion, useAnimationControls, Variants } from "framer-motion";
+import { motion, useAnimationControls, Variants } from "framer-motion";
 import { EASING } from "@/constants/animations";
-import AnimatedBorder from "./animated-border";
+import AnimatedBorder from "@/components/animations/animated-border";
+
 import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 
 interface Props {
@@ -20,7 +21,7 @@ const FeaturedProjectCard: FC<Props> = ({ project, idx }) => {
   return (
     <>
       {/* First element gets top border */}
-      {idx === 0 ? <AnimatedBorder finished={finished} /> : null}
+      {idx === 0 ? <AnimatedBorder bgColor="bg-black" trigger={finished} /> : null}
       <article ref={ref} className="flex justify-between py-8">
         <motion.div
           className="flex items-baseline gap-2 will-change-transform"
@@ -41,7 +42,7 @@ const FeaturedProjectCard: FC<Props> = ({ project, idx }) => {
           <HiArrowRight className="text-3xl" />
         </motion.div>
       </article>
-      <AnimatedBorder finished={finished} />
+      <AnimatedBorder bgColor="bg-black" trigger={finished} />
     </>
   );
 };

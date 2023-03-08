@@ -1,8 +1,5 @@
-import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 import { ProjectsType, ProjectType } from "@/types/sanity/projects";
-import { AnimationControls, useAnimationControls } from "framer-motion";
-import { FC, useRef } from "react";
-import AnimatedBorder from "./animated-border";
+import { FC } from "react";
 import FeaturedProjectCard from "./featured-project-card";
 
 interface Props {
