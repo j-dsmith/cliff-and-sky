@@ -1,21 +1,28 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 import heroSrc from "@/assets/hero.png";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import { EASING } from "@/constants/animations";
 import { COLORS } from "@/constants/colors";
+import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 
 const HeroSection = () => {
-  const handleIntroAnimationEnd = () => {
+  const ref = useRef(null);
+  const controls = useAnimationControls();
+
+  const finished = useInViewAnimation<typeof ref>(ref, controls);
+
+  if (finished) {
     document.body.classList.remove("fixed");
-    window.scrollTo(0, 0);
-  };
+  }
 
   return (
     <motion.section
+      ref={ref}
       initial="initial"
-      animate="animate"
+      animate={controls}
       className="isolate flex h-[calc(100vh-80px)] flex-col items-center justify-end px-6"
     >
       <motion.h1
@@ -40,7 +47,6 @@ const HeroSection = () => {
       <motion.div
         className="fixed top-0 left-0 right-0 bottom-0 z-40 origin-top bg-black"
         variants={overlayVariants}
-        onAnimationComplete={handleIntroAnimationEnd}
       />
     </motion.section>
   );

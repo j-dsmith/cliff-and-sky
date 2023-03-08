@@ -24,6 +24,7 @@ module.exports = {
         neue: ["PPNeueMonreal", "sans-serif"],
         ["neue-medium"]: ["PPNeueMonreal-Medium", "sans-serif"],
         ["neue-thin"]: ["PPNeueMonreal-Thin", "sans-serif"],
+        montserrat: ["var(--font-montserrat)", "sans-serif"],
       },
     },
     plugins: [],

@@ -1,9 +1,8 @@
 "use client";
 
-import { AnimationControls, useAnimationControls, useInView } from "framer-motion";
+import { useAnimationControls } from "framer-motion";
 import { ProjectsType } from "@/types/sanity/projects";
-import { FC, useEffect, useRef, useState } from "react";
-import { EASING } from "@/constants/animations";
+import { FC, useRef } from "react";
 import ProjectsSectionHeader from "./projects-section-header";
 import ProjectsSectionSubheader from "./projects-section-subheader";
 import Spacer from "../spacer";
@@ -22,17 +21,15 @@ const ProjectsSection: FC<Props> = ({ projects }) => {
   useInViewAnimation<typeof ref>(ref, controls);
 
   return (
-    <section className="px-6 font-neue md:px-16">
-      <article className="flex flex-col gap-2 pb-8">
-        <div ref={ref}>
-          <ProjectsSectionHeader controls={controls} />
-        </div>
-
+    <section className="px-6 md:px-16">
+      <article ref={ref} className="flex flex-col">
+        <ProjectsSectionHeader controls={controls} />
         <ProjectsSectionSubheader controls={controls} />
+        <Spacer className="h-4" />
         <ViewAllLink controls={controls} />
+        <Spacer className="h-16" />
       </article>
-      <Spacer className="h-16" />
-      <ProjectsList projects={projects} controls={controls} />
+      <ProjectsList projects={projects} />
     </section>
   );
 };

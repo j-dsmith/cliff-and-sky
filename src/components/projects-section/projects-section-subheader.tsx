@@ -12,7 +12,7 @@ const ProjectsSectionSubheader: FC<Props> = ({ controls }) => {
       variants={headerVariants}
       initial="initial"
       animate={controls}
-      className="w-[25ch] font-light text-slate-700 will-change-transform"
+      className="w-[25ch] text-slate-700 will-change-transform"
     >
       Freelance and personal graphic design projects I&apos;m proud of!
     </motion.p>

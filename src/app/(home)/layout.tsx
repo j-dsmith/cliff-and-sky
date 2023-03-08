@@ -7,7 +7,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html>
       <Head />
-      <body className="fixed">
+      <body className="fixed font-montserrat">
         <Header theme="light" />
         {children}
         <Footer theme="dark" />

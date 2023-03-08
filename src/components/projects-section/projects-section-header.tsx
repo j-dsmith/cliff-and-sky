@@ -8,11 +8,11 @@ interface Props {
 
 const ProjectsSectionHeader: FC<Props> = ({ controls }) => {
   const textClasses =
-    "absolute inline-block h-full w-full origin-left py-1 leading-none will-change-transform";
+    "absolute inline-block h-full w-full origin-left leading-none will-change-transform";
   const textSections = ["Selected", "Projects"];
   const renderAnimatedText = () => {
     return textSections.map((text) => (
-      <div className="relative overflow-hidden font-neue-medium text-6xl" key={text}>
+      <div className="relative overflow-hidden text-6xl font-semibold" key={text}>
         <motion.span
           className={textClasses}
           variants={textVariants}
@@ -40,7 +40,7 @@ const textVariants = {
     y: 0,
     rotate: 0,
     transition: {
-      duration: 1.8,
+      duration: 1.2,
       ease: EASING.easeOutCubic,
     },
   },

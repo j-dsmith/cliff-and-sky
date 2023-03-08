@@ -10,7 +10,7 @@ import { useEffect, useState, RefObject } from "react";
 export const useInViewAnimation = <T extends RefObject<Element>>(
   ref: T,
   controls: AnimationControls
-) => {
+): boolean => {
   const isInView = useInView(ref);
   const [doneAnimating, setDoneAnimating] = useState(false);
 
@@ -27,5 +27,5 @@ export const useInViewAnimation = <T extends RefObject<Element>>(
     setDoneAnimating(true);
   };
 
-  return { doneAnimating };
+  return doneAnimating;
 };

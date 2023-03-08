@@ -9,7 +9,7 @@ import { EASING } from "@/constants/animations";
 const HeroBanner = () => {
   return (
     <article className="isolate flex h-full flex-col justify-end pt-16 pb-8">
-      <h1 className="relative z-10 text-center  font-serif text-6xl  leading-none">Cliff & Sky</h1>
+      <h1 className="relative z-10 text-center text-6xl  leading-none">Cliff & Sky</h1>
       {/* <Spacer className="h-14" /> */}
       <div className="relative max-h-[450px] w-full flex-1">
         <Image alt="mountain" src={hero} width={5364} className="h-full object-cover" />

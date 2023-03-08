@@ -1,28 +1,34 @@
-import { FC } from "react";
-import Image, { StaticImageData } from "next/image";
+import { FC, useRef } from "react";
 import { ProjectType } from "@/types/sanity/projects";
 import { HiArrowRight } from "react-icons/hi2";
-import { AnimationControls, motion, Variants } from "framer-motion";
+import { AnimationControls, motion, useAnimationControls, Variants } from "framer-motion";
 import { EASING } from "@/constants/animations";
 import AnimatedBorder from "./animated-border";
+import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 
 interface Props {
   project: ProjectType;
-  controls: AnimationControls;
   idx: number;
 }
 
-const FeaturedProjectCard: FC<Props> = ({ project, controls, idx }) => {
+const FeaturedProjectCard: FC<Props> = ({ project, idx }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const controls = useAnimationControls();
+
+  const finished = useInViewAnimation<typeof ref>(ref, controls);
+
   return (
     <>
-      <article className="flex justify-between py-8 font-sans">
+      {/* First element gets top border */}
+      {idx === 0 ? <AnimatedBorder finished={finished} /> : null}
+      <article ref={ref} className="flex justify-between py-8">
         <motion.div
           className="flex items-baseline gap-2 will-change-transform"
           initial="initial"
           animate={controls}
           variants={titleVariants}
         >
-          <p className="text-xl font-thin uppercase">{project.title}</p>
+          <p className="text-xl  uppercase">{project.title}</p>
           <p className="text-sm text-slate-500">{project.category}</p>
         </motion.div>
         <motion.div
@@ -35,7 +41,7 @@ const FeaturedProjectCard: FC<Props> = ({ project, controls, idx }) => {
           <HiArrowRight className="text-3xl" />
         </motion.div>
       </article>
-      <AnimatedBorder controls={controls} />
+      <AnimatedBorder finished={finished} />
     </>
   );
 };
@@ -68,7 +74,7 @@ const iconVariants: Variants = {
     x: 0,
     transition: {
       delay: 0.6,
-      duration: 0.3,
+      duration: 0.6,
       ease: EASING.easeOutCubic,
     },
   },

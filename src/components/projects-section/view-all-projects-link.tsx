@@ -15,7 +15,7 @@ const ViewAllLink: FC<Props> = ({ controls }) => {
       animate={controls}
       className="flex items-center gap-4 will-change-transform"
     >
-      <p className="font-neue-thin text-xl uppercase">See All</p>
+      <p className="text-xl uppercase">See All</p>
       <ArrowLink url="/design" theme="light" />
     </motion.div>
   );
@@ -31,7 +31,7 @@ const wrapperVariants = {
     x: 0,
     rotate: 0,
     transition: {
-      delay: 1.5,
+      delay: 0.9,
       duration: 1.5,
       ease: EASING.easeOutCubic,
     },

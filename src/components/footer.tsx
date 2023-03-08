@@ -4,7 +4,6 @@ import { socialLinks } from "@/data/social-links";
 import Link from "next/link";
 import ArrowLink from "./arrow-link";
 import SocialLink from "./social-link";
-import clsx from "clsx";
 import { cva } from "class-variance-authority";
 
 const footerClasses = cva(["flex", "flex-col", "justify-center", "gap-1", "px-6", "py-32"], {
@@ -22,10 +21,10 @@ const footerClasses = cva(["flex", "flex-col", "justify-center", "gap-1", "px-6"
 const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
   return (
     <section className={footerClasses({ theme })}>
-      <p className="font-walsheim text-4xl font-bold uppercase">Have An Idea?</p>
+      <p className="text-4xl font-semibold">Design Idea?</p>
 
       <div className="flex items-center justify-between">
-        <p className="text-2xl font-thin">Let&apos;s Connect!</p>
+        <p className="text-2xl font-light uppercase">Let&apos;s Connect!</p>
         <ArrowLink url="/contact" className="h-14 w-14 text-3xl" outline={true} />
       </div>
       <ul className="mt-8 flex items-center justify-between border-b border-white pb-8">
