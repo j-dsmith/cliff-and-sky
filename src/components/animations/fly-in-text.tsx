@@ -1,27 +1,32 @@
 import { forwardRef, FC } from "react";
-import { EASING } from "@/constants/animations";
-import { AnimationControls, motion } from "framer-motion";
+import { EASING, TRANSITION } from "@/constants/animations";
+import { AnimationControls, LazyMotion, m } from "framer-motion";
 import clsx from "clsx";
+import { loadFeatures } from "@/lib/framer";
+import { setAnimationController } from "@/lib/setAnimationController";
+import { AnimationController } from "@/types/sharedAnimations";
 
 interface Props {
   text: string;
-  controls: AnimationControls;
+  controller: AnimationController;
   className?: string;
 }
 
-const FlyInText = forwardRef<HTMLDivElement, Props>(({ text, className, controls }, ref) => {
+const FlyInText = forwardRef<HTMLDivElement, Props>(({ text, className, controller }, ref) => {
   const textClasses =
     "absolute inline-block h-full w-full origin-left leading-none will-change-transform";
   return (
     <div className="relative overflow-hidden" ref={ref}>
-      <motion.span
-        className={clsx(textClasses, className)}
-        variants={textVariants}
-        initial="initial"
-        animate={controls}
-      >
-        {text}
-      </motion.span>
+      <LazyMotion features={loadFeatures}>
+        <m.span
+          className={clsx(textClasses, className)}
+          variants={textVariants}
+          initial="initial"
+          animate={setAnimationController(controller)}
+        >
+          {text}
+        </m.span>
+      </LazyMotion>
       <p className={clsx("invisible py-1 leading-none", className)}>{text}</p>
     </div>
   );
@@ -32,7 +37,7 @@ FlyInText.displayName = "FlyInText";
 const textVariants = {
   initial: {
     opacity: 0,
-    y: 125,
+    y: 100,
     rotate: 6,
   },
   animate: {
@@ -40,9 +45,8 @@ const textVariants = {
     y: 0,
     rotate: 0,
     transition: {
-      duration: 0.9,
-      ease: EASING.easeOutCubic,
-      opacity: { duration: 0.6, ease: EASING.easeInCubic },
+      ...TRANSITION.genericTextSpring,
+      duration: 2.1,
     },
   },
 };

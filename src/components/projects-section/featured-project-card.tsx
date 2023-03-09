@@ -1,11 +1,13 @@
 import { FC, useRef } from "react";
 import { ProjectType } from "@/types/sanity/projects";
 import { HiArrowRight } from "react-icons/hi2";
-import { motion, useAnimationControls, Variants } from "framer-motion";
-import { EASING } from "@/constants/animations";
+import { LazyMotion, m, useAnimationControls, Variants } from "framer-motion";
+import { EASING, TRANSITION } from "@/constants/animations";
 import AnimatedBorder from "@/components/animations/animated-border";
 
 import { useInViewAnimation } from "@/hooks/useInViewAnimation";
+import { loadFeatures } from "@/lib/framer";
+import FadeIn from "../animations/fade-in";
 
 interface Props {
   project: ProjectType;
@@ -16,69 +18,37 @@ const FeaturedProjectCard: FC<Props> = ({ project, idx }) => {
   const ref = useRef<HTMLDivElement>(null);
   const controls = useAnimationControls();
 
-  const finished = useInViewAnimation<typeof ref>(ref, controls);
+  useInViewAnimation<typeof ref>(ref, controls);
+
+  const titleTransition = {
+    ...TRANSITION.genericTextSpring,
+    delay: 0.3,
+    duration: 1.2,
+  };
 
   return (
     <>
       {/* First element gets top border */}
-      {idx === 0 ? <AnimatedBorder bgColor="bg-black" trigger={finished} /> : null}
+      {idx === 0 ? <AnimatedBorder bgColor="bg-black" controller={controls} /> : null}
       <article ref={ref} className="flex justify-between py-8">
-        <motion.div
-          className="flex items-baseline gap-2 will-change-transform"
-          initial="initial"
-          animate={controls}
-          variants={titleVariants}
+        <FadeIn
+          controller={controls}
+          className="flex items-baseline gap-2"
+          direction="y"
+          yStart={20}
+          transition={titleTransition}
         >
           <p className="text-xl  uppercase">{project.title}</p>
           <p className="text-sm text-slate-500">{project.category}</p>
-        </motion.div>
-        <motion.div
-          className="will-change-transform"
-          initial="initial"
-          variants={iconVariants}
-          animate={controls}
-          custom={idx}
-        >
+        </FadeIn>
+
+        <FadeIn controller={controls} transition={titleTransition} direction="x" xStart={-15}>
           <HiArrowRight className="text-3xl" />
-        </motion.div>
+        </FadeIn>
       </article>
-      <AnimatedBorder bgColor="bg-black" trigger={finished} />
+      <AnimatedBorder bgColor="bg-black" controller={controls} />
     </>
   );
-};
-
-// Animations
-
-const titleVariants: Variants = {
-  initial: {
-    opacity: 0,
-    y: 5,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.6,
-      duration: 0.6,
-      ease: EASING.easeOutCubic,
-    },
-  },
-};
-
-const iconVariants: Variants = {
-  initial: {
-    opacity: 0,
-    x: -10,
-  },
-  animate: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: 0.6,
-      duration: 0.6,
-      ease: EASING.easeOutCubic,
-    },
-  },
 };
 
 export default FeaturedProjectCard;

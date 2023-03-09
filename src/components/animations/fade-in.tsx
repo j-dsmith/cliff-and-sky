@@ -1,18 +1,23 @@
-import { EASING } from "@/constants/animations";
-import { AnimationControls, motion, Transition } from "framer-motion";
-import { FC, forwardRef, ReactNode } from "react";
+import { EASING, TRANSITION } from "@/constants/animations";
+import { loadFeatures } from "@/lib/framer";
+import { setAnimationController } from "@/lib/setAnimationController";
+import { AnimationController } from "@/types/sharedAnimations";
+import clsx from "clsx";
+import { LazyMotion, m, Transition } from "framer-motion";
+import { forwardRef, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  controller: boolean | AnimationControls;
+  controller: AnimationController;
   direction: "x" | "y";
   xStart?: number;
   yStart?: number;
   transition?: Transition;
+  className?: string;
 }
 
 const FadeIn = forwardRef<HTMLDivElement, Props>(
-  ({ children, direction, xStart, yStart, transition, controller }, ref) => {
+  ({ children, direction, xStart, yStart, transition, controller, className }, ref) => {
     const wrapperVariants = {
       initial: {
         opacity: 0,
@@ -24,30 +29,25 @@ const FadeIn = forwardRef<HTMLDivElement, Props>(
         x: 0,
         y: 0,
         transition: { ...transition } || {
+          ...TRANSITION.genericTextSpring,
           delay: 0.9,
           duration: 1.5,
-          ease: EASING.easeOutCubic,
         },
       },
     };
 
-    const setAnimationControls = (controller: boolean | AnimationControls) => {
-      if (typeof controller === "boolean") {
-        return controller ? "animate" : "initial";
-      }
-      return controller;
-    };
-
     return (
-      <motion.div
-        ref={ref}
-        className="will-change-transform"
-        initial="initial"
-        animate={setAnimationControls(controller)}
-        variants={wrapperVariants}
-      >
-        {children}
-      </motion.div>
+      <LazyMotion features={loadFeatures}>
+        <m.div
+          ref={ref}
+          className={clsx("will-change-transform", className)}
+          initial="initial"
+          animate={setAnimationController(controller)}
+          variants={wrapperVariants}
+        >
+          {children}
+        </m.div>
+      </LazyMotion>
     );
   }
 );

@@ -11,7 +11,7 @@ export const useInViewAnimation = <T extends RefObject<Element>>(
   ref: T,
   controls: AnimationControls
 ): boolean => {
-  const isInView = useInView(ref);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -150px 0px" });
   const [doneAnimating, setDoneAnimating] = useState(false);
 
   // Start animation sequence when element comes in view

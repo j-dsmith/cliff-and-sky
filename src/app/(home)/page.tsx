@@ -5,6 +5,7 @@ import { SanityClient } from "next-sanity";
 import HeroSection from "@/components/hero-section";
 import ProjectsSection from "@/components/projects-section/projects-section";
 import Spacer from "@/components/spacer";
+import AboutSection from "@/components/about-section/about-section";
 
 const HomePage = async () => {
   const projects = await getProjects(myClient);
@@ -13,6 +14,7 @@ const HomePage = async () => {
     <div>
       <HeroSection />
       <Spacer className="h-20" />
+      <AboutSection />
       <ProjectsSection projects={projects} />
       <Spacer className="h-20" />
     </div>

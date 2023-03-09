@@ -12,7 +12,7 @@ const SocialLink: FC<Props> = ({ link }) => {
   const Icon = icon;
   return (
     <Link href={url}>
-      <Icon className="h-5 w-5" />
+      <Icon className="h-6 w-6" />
     </Link>
   );
 };

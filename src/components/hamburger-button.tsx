@@ -2,7 +2,7 @@ import { FC } from "react";
 import clsx from "clsx";
 import { AnimationControls, motion } from "framer-motion";
 import { COLORS } from "@/constants/colors";
-import { EASING } from "@/constants/animations";
+import { EASING, TRANSITION } from "@/constants/animations";
 import { cva } from "class-variance-authority";
 
 interface Props {
@@ -82,9 +82,10 @@ const btnVariant = {
     y: 0,
     opacity: 1,
     transition: {
-      delay: 1.2,
-      duration: 0.6,
-      ease: EASING.easeInOutCubic,
+      ...TRANSITION.genericTextSpring,
+      bounce: 0.45,
+      delay: 1.5,
+      duration: 1.5,
     },
   },
   initial: (theme: "dark" | "light" | null) => ({
@@ -141,7 +142,5 @@ const bottomLineVariant = {
     y: 2,
   }),
 };
-
-const initialButtonVariant = {};
 
 export default HamburgerButton;
