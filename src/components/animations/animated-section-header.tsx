@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import clsx from "clsx";
-import { useAnimationControls } from "framer-motion";
+import { useAnimationControls, useInView } from "framer-motion";
 import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 import { TRANSITION } from "@/constants/animations";
 import FlyInText from "./fly-in-text";
@@ -25,8 +25,7 @@ interface Props {
 
 const AnimatedSectionHeader: FC<Props> = ({ headerConfig, subheaderConfig, linkConfig, theme }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const controls = useAnimationControls();
-  useInViewAnimation<typeof ref>(ref, controls);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -150px 0px" });
 
   const { headerSections, classOverride } = headerConfig;
   const { label, url } = linkConfig;
@@ -49,14 +48,14 @@ const AnimatedSectionHeader: FC<Props> = ({ headerConfig, subheaderConfig, linkC
         key={text}
         text={text}
         className={clsx("text-6xl font-semibold", classOverride)}
-        controller={controls}
+        controller={isInView}
       />
     ));
   };
 
   const renderAnimatedSubheader = () => {
     return !subheaderConfig ? null : (
-      <FadeIn controller={controls} direction="y" yStart={10} transition={subHeaderTransition}>
+      <FadeIn controller={isInView} direction="y" yStart={10} transition={subHeaderTransition}>
         <p className="w-[25ch] text-slate-600 will-change-transform">{subheaderConfig.text}</p>
       </FadeIn>
     );
@@ -67,7 +66,7 @@ const AnimatedSectionHeader: FC<Props> = ({ headerConfig, subheaderConfig, linkC
       {renderAnimatedHeader()}
       {renderAnimatedSubheader()}
       <Spacer className="h-4" />
-      <TextArrowLink controller={controls} label={label} url={url} theme={theme} />
+      <TextArrowLink controller={isInView} label={label} url={url} theme={theme} />
       <Spacer className="h-16" />
     </article>
   );

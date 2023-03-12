@@ -5,14 +5,27 @@ import clsx from "clsx";
 import { loadFeatures } from "@/lib/framer";
 import { AnimationController } from "@/types/sharedAnimations";
 import { setAnimationController } from "@/lib/setAnimationController";
+import { cva } from "class-variance-authority";
 
 interface Props {
   controller: AnimationController;
-  bgColor: string;
+  theme: "dark" | "light";
   transition?: Transition;
 }
 
-const AnimatedBorder: FC<Props> = ({ controller, bgColor, transition }) => {
+const borderClassVariants = cva(["h-px", "w-full", "origin-left"], {
+  variants: {
+    theme: {
+      dark: ["bg-white"],
+      light: ["bg-black"],
+    },
+  },
+  defaultVariants: {
+    theme: "dark",
+  },
+});
+
+const AnimatedBorder: FC<Props> = ({ controller, theme, transition }) => {
   const borderVariants: Variants = {
     initial: {
       scaleX: 0,
@@ -29,7 +42,7 @@ const AnimatedBorder: FC<Props> = ({ controller, bgColor, transition }) => {
   return (
     <LazyMotion features={loadFeatures}>
       <m.div
-        className={clsx("h-px w-full origin-left", bgColor)}
+        className={borderClassVariants({ theme })}
         variants={borderVariants}
         initial="initial"
         animate={setAnimationController(controller)}

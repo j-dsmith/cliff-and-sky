@@ -1,13 +1,13 @@
 "use client";
 
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { navLinks } from "@/data/nav-links";
 import { socialLinks } from "@/data/social-links";
 import Link from "next/link";
 import ArrowLink from "./arrow-link";
 import SocialLink from "./social-link";
 import { cva } from "class-variance-authority";
-import { motion, useAnimationControls } from "framer-motion";
+import { motion, useAnimationControls, useInView } from "framer-motion";
 import { useInViewAnimation } from "@/hooks/useInViewAnimation";
 import { EASING, TRANSITION } from "@/constants/animations";
 import FlyInText from "@/components/animations/fly-in-text";
@@ -31,8 +31,8 @@ const footerClasses = cva(["flex", "flex-col", "justify-center", "gap-1", "px-6"
 
 const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
   const contentRef = useRef<HTMLDivElement>(null);
-  const controls = useAnimationControls();
-  useInViewAnimation<typeof contentRef>(contentRef, controls);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0, once: true });
 
   const fadeTransition = {
     ...TRANSITION.genericTextSpring,
@@ -52,7 +52,7 @@ const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
   const linkConfig = { url: "/contact", label: "Let's Connect!" };
 
   return (
-    <section className={footerClasses({ theme })}>
+    <section className={footerClasses({ theme })} ref={ref}>
       <AnimatedSectionHeader headerConfig={headerConfig} linkConfig={linkConfig} theme={theme} />
       <article ref={contentRef}>
         {/* Nav Links */}
@@ -60,7 +60,7 @@ const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
           transition={fadeTransition}
           direction="y"
           yStart={fadeInStart}
-          controller={controls}
+          controller={isInView}
         >
           <ul className="mt-8 flex items-center justify-between will-change-transform">
             {navLinks.map(({ name, url }) => (
@@ -73,14 +73,14 @@ const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
           </ul>
         </FadeIn>
         <Spacer className="h-8" />
-        <AnimatedBorder controller={controls} bgColor="bg-white" transition={borderTransition} />
+        <AnimatedBorder controller={isInView} theme={theme} transition={borderTransition} />
         {/* Social Links */}
         <Spacer className="h-8" />
         <FadeIn
           transition={fadeTransition}
           direction="y"
           yStart={fadeInStart}
-          controller={controls}
+          controller={isInView}
         >
           <div className="mt-4 mb-8 flex gap-4">
             {socialLinks.map((link) => (
@@ -94,7 +94,7 @@ const Footer: FC<{ theme: "dark" | "light" }> = ({ theme }) => {
           transition={fadeTransition}
           direction="y"
           yStart={fadeInStart}
-          controller={controls}
+          controller={isInView}
         >
           <p className="text-sm">
             I respectfully acknowledge that I create on the traditional and ancestral homelands of

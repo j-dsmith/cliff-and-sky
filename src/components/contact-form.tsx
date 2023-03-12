@@ -64,7 +64,7 @@ const ContactForm = () => {
             placeholder="Tell Me About Your Project"
           />
         </div>
-        <button className="text-2xl font-thin uppercase" type="submit">
+        <button className="text-2xl font-light uppercase" type="submit">
           Submit
         </button>
       </form>

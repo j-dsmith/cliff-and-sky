@@ -2,7 +2,6 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    scrollRestoration: true,
   },
   images: {
     domains: ["cdn.sanity.io", "images.unsplash.com"],

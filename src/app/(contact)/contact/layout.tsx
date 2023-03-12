@@ -7,10 +7,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html>
       <Head />
-      <body className="">
+      <body className="font-montserrat">
         <Header theme="dark" />
         {children}
-        <Footer theme="white" />
+        <Footer theme="light" />
       </body>
     </html>
   );

@@ -9,9 +9,10 @@ import { useEffect, useState, RefObject } from "react";
  */
 export const useInViewAnimation = <T extends RefObject<Element>>(
   ref: T,
-  controls: AnimationControls
+  controls: AnimationControls,
+  containerRef?: T
 ): boolean => {
-  const isInView = useInView(ref, { once: true, margin: "0px 0px -150px 0px" });
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -150px 0px", root: containerRef });
   const [doneAnimating, setDoneAnimating] = useState(false);
 
   // Start animation sequence when element comes in view
